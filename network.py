@@ -1,21 +1,22 @@
 import sys
 import re
 
-def main(opt):
+def main():
+    result = ""
     for option in sys.argv[3:]:
         # if option == '-t':
         #     print(type_of_log())
         if option == '-num':
-            print(num_unique_ips())
+            result += num_unique_ips()
         if option == '-m':
-            print(most_common_ips())
+            result += most_common_ips()
         if option == '-l':
-            print(least_common_ips())
+            result += least_common_ips()
+    return result.strip()
 
-def num_uniq_ips():
+def num_unique_ips():
     ips = set()
-    f = open(sys.argv[1])
-    lines = f.readlines()
+    lines = open(sys.argv[1]).readlines()
     for l in lines:
         items = l.split(' ')
         if len(items) > 13:
@@ -27,13 +28,12 @@ def num_uniq_ips():
             ips.add(dst)
         else:
             pass
-    return len(ips)
+    return str(len(ips)) + '\n'
 
 def most_common_ips():
-    f = open(sys.argv[1])
-    lines = f.readlines()
+    f = open(sys.argv[1], 'r').read()
     
-    all_ips_li = re.findall(r"[0-9]+\.[0-9]+\.[0-9]+.[0-9]+", lines)
+    all_ips_li = re.findall(r"[0-9]+\.[0-9]+\.[0-9]+.[0-9]+", f)
 
     ip_dict = {}
 
@@ -45,15 +45,17 @@ def most_common_ips():
         return ip_dict[ip]
 
     sorted_dict = sorted(ip_dict, key=compare_count, reverse=True)
-
+    result=""
     for ip in sorted_dict[:5]:
-        print(ip, ip_dict[ip])
+        # print(ip, ip_dict[ip])
+        result+= str(ip) + " " + str(ip_dict[ip]) + "\n"
+    return result
+    
 
 def least_common_ips():
-    f = open(sys.argv[1])
-    lines = f.readlines()
+    f = open(sys.argv[1], 'r').read()
     
-    all_ips_li = re.findall(r"[0-9]+\.[0-9]+\.[0-9]+.[0-9]+", lines)
+    all_ips_li = re.findall(r"[0-9]+\.[0-9]+\.[0-9]+.[0-9]+", f)
 
     ip_dict = {}
 
@@ -65,7 +67,8 @@ def least_common_ips():
         return ip_dict[ip]
 
     sorted_dict = sorted(ip_dict, key=compare_count, reverse=True)
-
+    result = ""
     for ip in sorted_dict[-5:]:
-        print(ip, ip_dict[ip])
+        result+= str(ip) + " " + str(ip_dict[ip]) + "\n"
+    return result
 
