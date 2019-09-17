@@ -1,22 +1,10 @@
 #!/usr/bin/env python3
 
 import sys
-# import logic
-import apache
-# import ufw
-# import network
-
-# if sys.argv[2] == '-t':
-#     print(logic.type_of_log())
+import utility
 
 def main():
-    switcher = {
-        "-a": apache.common()
-        # ,
-        # "-u": ufw(),
-        # "-n": network()
-    }
-    print(switcher.get(sys.argv[2], "invalid log"))
+    print(utility.common())
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
