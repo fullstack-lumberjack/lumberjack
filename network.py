@@ -1,9 +1,10 @@
 import sys
 import re
+import logic
 
 def main():
     result = ""
-    for option in sys.argv[3:]:
+    for option in sys.argv[2:]:
         # if option == '-t':
         #     print(type_of_log())
         if option == '-num':
@@ -12,6 +13,11 @@ def main():
             result += most_common_ips()
         if option == '-l':
             result += least_common_ips()
+        if option == '-t':
+            result += logic.type_of_log()
+        if option == False:
+            result += num_unique_ips() + most_common_ips() + least_common_ips()
+
     return result.strip()
 
 def num_unique_ips():
