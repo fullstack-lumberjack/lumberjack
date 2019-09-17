@@ -1,32 +1,24 @@
+#!/usr/bin/env python3
+
 import sys
-import logic
-# import apache
+# import logic
+import apache
 # import ufw
-import network
+# import network
 
-# unique (num)
-# top 5
-# least 5
-
-# -h 
-# if len(sys.argv) <= 1 or sys.argv[1] == '-h':
-#     print("Input like this: lumberjack.py <logfile> <logtype>. Ex: lumberjack.py log.txt -a")
-
-if sys.argv[2] == '-t':
-    print(logic.type_of_log())
-
-def switch(arg):
-    switcher = {
-        # "-a": apache(),
-        # "-u": ufw(),
-        "-n": network.main("-t")
-    }
-    print(switcher.get(arg, "invalid log"))
-
-switch(sys.argv[2])
+# if sys.argv[2] == '-t':
+#     print(logic.type_of_log())
 
 def main():
-    return
+    switcher = {
+        "-a": apache.common()
+        # ,
+        # "-u": ufw(),
+        # "-n": network()
+    }
+    print(switcher.get(sys.argv[2], "invalid log"))
 
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) <= 1:
+        print("How to use: lumberjack.py <logfile> <logtype>. Ex: lumberjack.py log.txt -a")
+    else: main()
