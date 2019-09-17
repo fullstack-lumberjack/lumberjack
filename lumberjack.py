@@ -2,19 +2,19 @@
 
 import sys
 # import logic
-import apache
+# import apache
 # import ufw
-# import network
+import network
 
 # if sys.argv[2] == '-t':
 #     print(logic.type_of_log())
 
 def main():
     switcher = {
-        "-a": apache.common()
+        # "-a": apache.common()
         # ,
         # "-u": ufw(),
-        # "-n": network()
+        "-n": network.main()
     }
     print(switcher.get(sys.argv[2], "invalid log"))
 
