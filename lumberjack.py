@@ -4,25 +4,19 @@ import sys
 # import logic
 import apache
 # import ufw
-import network
-
-# unique (num)
-# top 5
-# least 5
+# import network
 
 # if sys.argv[2] == '-t':
 #     print(logic.type_of_log())
 
 def main():
     switcher = {
-
         "-a": apache.common()
         # ,
         # "-u": ufw(),
         # "-n": network()
     }
     print(switcher.get(sys.argv[2], "invalid log"))
-
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
