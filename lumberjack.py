@@ -19,7 +19,6 @@ def main():
     print(switcher.get(sys.argv[2], "invalid log"))
 
 if __name__ == '__main__':
-    print('hello world')
     if len(sys.argv) <= 1:
         print("How to use: lumberjack.py <logfile> <logtype>. Ex: lumberjack.py log.txt -a")
     else: main()
