@@ -2,6 +2,7 @@
 
 import sys
 from scripts import utility
+from scripts import options
 
 def main():
     log_type = utility.type_of_log()
@@ -11,7 +12,8 @@ def main():
     print(utility.most_ips())
     print(utility.least_ips())
 
-    option = sys.argv[2]
+    if len(sys.argv) >= 3:
+        options.print_option(sys, log_type)
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:

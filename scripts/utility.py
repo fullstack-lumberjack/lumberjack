@@ -59,7 +59,7 @@ def compare_port_value(port):
 
 def most_ports():
     reverse_sorted = sorted(port_dict, key=compare_port_value, reverse=True)
-    print('\nThese are the top 5 most occurring ports:')
+    print('These are the top 5 most occurring ports:')
     for port in reverse_sorted[:5]:
         print(f'port: {port}, occurrences: {port_dict[port]}')
 
