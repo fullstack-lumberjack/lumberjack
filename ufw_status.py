@@ -1,13 +1,13 @@
 import sys
 import re
-​
+
 def main():
     for option in sys.argv[2:]:
         if option == '-sc':
             print(ufw_status_code())
         if option == '-p':
             print(ufw_protocol())
-​
+
 def ufw_status_code():
     content = open(sys.argv[1], 'r').read()
     
@@ -22,7 +22,7 @@ def ufw_status_code():
     for ip in allow_list:
         allow_set.add(ip)
     print(f'These are the allowed ips: {allow_set} \n')
-​
+
     audit_list = re.findall(r'(?<=AUDIT]\ IN=\ OUT=eth0\ SRC=)[0-9]+\.[0-9]+\.[0-9]+.[0-9]+(?=\ DST)', content)
     audit_set = set()
     for ip in audit_list:
