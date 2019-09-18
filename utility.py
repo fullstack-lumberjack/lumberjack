@@ -38,3 +38,47 @@ def least_ips():
     print('\nThese are the top 5 least occurring ips:')
     for ip in sorted_ip_list[:5]:
         print(f'ip: {ip}, occurrence: {ip_dictionary[ip]}')
+
+
+def create_port_dictionaries():
+    content = open(sys.argv[1], 'r').read()
+    all_source_ports = re.findall(r"SPT=([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])", content)
+    all_dest_ports = re.findall(r"DPT=([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])", content)
+    
+    port_dict = {}
+    port_set = set()
+    for port in all_source_ports: 
+        if port in port_dict: port_dict[port] += 1
+        else: port_dict[port] = 1
+    for port in all_dest_ports: 
+        if port in port_dict: port_dict[port] += 1
+        else: port_dict[port] = 1
+    return [port_dict, port_set]
+
+big_port_dictionary = create_port_dictionaries()
+port_dict = big_port_dictionary[0]
+port_set = big_port_dictionary[1]
+
+def compare_port_value(port):
+    return port_dict[port]
+
+def most_ports():
+    reverse_sorted = sorted(port_dict, key=compare_port_value, reverse=True)
+    print('\nThese are the top 5 most occurring ports:')
+    for port in reverse_sorted[:5]:
+        print(f'port: {port}, occurrence: {port_dict[port]}')
+
+def type_of_log():
+    f = open(sys.argv[1])
+    lines = f.readlines()
+    log = ""
+    for l in lines:
+        if "BLOCK" in l: 
+            log = "linux firewall log"
+        elif ("GET" or "HEAD") in l:
+            log = "web server log"
+        elif ("INBOUND" or "OUTBOUND") in l:
+            log = "network log"
+        else:
+            log = "Daylight in the swamp!"
+    return log
