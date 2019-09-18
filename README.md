@@ -1,4 +1,4 @@
-![](https://www.pngfind.com/pngs/m/204-2049920_lumberjack-logo-knotts-berry-farm-hd-png-download.png)
+![](http://themeparkcanuck.com/wp-content/uploads/2017/08/cw-lumberjack-logo.png)
 LumberJack is a python log parsing program that can identify log types and return the most common queried log information. 
 
 ## How to use
