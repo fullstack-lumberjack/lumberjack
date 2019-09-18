@@ -1,5 +1,14 @@
 import sys
 import re
+import colorama
+
+colorama.init()
+
+RED = '\033[31m'
+GREEN = '\033[32m'
+CYAN = '\033[36m'
+RESET = '\033[0m'
+YELLOW = '\033[33m'
 
 def create_dictionaries():
     content = open(sys.argv[1], 'r').read()
@@ -25,17 +34,17 @@ def compare_value(ip):
 def most_ips():
     reverse_sorted = sorted(ip_dictionary, key=compare_value, reverse=True)
 
-    print('These are the top 5 most occurring ips:')
+    print(YELLOW+'These are the top 5 most occurring ips:'+RESET)
     for ip in reverse_sorted[:5]:
-        print(f'ip: {ip}, occurrences: {ip_dictionary[ip]}')
+        print(CYAN+'ip: ' + RESET+GREEN+f'{ip}' +RESET+CYAN+ ', occurrence: '+ RESET+GREEN+f'{ip_dictionary[ip]}'+RESET)
     return 'FINISHED\n'
     
 def least_ips():
     sorted_ip_list = sorted(ip_dictionary, key=compare_value, reverse=False)
 
-    print('These are the top 5 least occurring ips:')
+    print(YELLOW+'These are the top 5 least occurring ips:'+RESET)
     for ip in sorted_ip_list[:5]:
-        print(f'ip: {ip}, occurrences: {ip_dictionary[ip]}')
+        print(CYAN+'ip: ' + RESET+GREEN+f'{ip}' +RESET+CYAN+ ', occurrence: '+ RESET+GREEN+f'{ip_dictionary[ip]}'+RESET)
     return 'FINISHED\n'
 
 
@@ -59,7 +68,8 @@ def compare_port_value(port):
 
 def most_ports():
     reverse_sorted = sorted(port_dict, key=compare_port_value, reverse=True)
-    print('These are the top 5 most occurring ports:')
+    print(YELLOW+'These are the top 5 most occurring ports:'+RESET)
+
     for port in reverse_sorted[:5]:
         print(f'port: {port}, occurrences: {port_dict[port]}')
 
