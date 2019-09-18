@@ -13,8 +13,6 @@ def main():
 
     option = sys.argv[2]
 
-    if option ==
-
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
         print("How to use: lumberjack <log> <option> Ex: lumberjack.py log.txt <-a>")
