@@ -15,13 +15,9 @@ def create_dictionaries():
     
     return [ip_dictionary, ip_set]
 
-big_dictionary = create_dictionaries()
-ip_dictionary = big_dictionary[0]
-ip_set = big_dictionary[1]
-
 def unique_ips():
-    print(f'\nThere are {len(ip_set)} unique ips.')
-    return 'FINISHED'
+    print(f'There are {len(ip_set)} unique ips.')
+    return 'FINISHED\n'
 
 def compare_value(ip):
     return ip_dictionary[ip]
@@ -29,18 +25,18 @@ def compare_value(ip):
 def most_ips():
     reverse_sorted = sorted(ip_dictionary, key=compare_value, reverse=True)
 
-    print('\nThese are the top 5 most occurring ips:')
+    print('These are the top 5 most occurring ips:')
     for ip in reverse_sorted[:5]:
         print(f'ip: {ip}, occurrences: {ip_dictionary[ip]}')
-    return 'FINISHED'
+    return 'FINISHED\n'
     
 def least_ips():
     sorted_ip_list = sorted(ip_dictionary, key=compare_value, reverse=False)
 
-    print('\nThese are the top 5 least occurring ips:')
+    print('These are the top 5 least occurring ips:')
     for ip in sorted_ip_list[:5]:
         print(f'ip: {ip}, occurrences: {ip_dictionary[ip]}')
-    return 'FINISHED'
+    return 'FINISHED\n'
 
 
 def create_port_dictionaries():
@@ -57,10 +53,6 @@ def create_port_dictionaries():
         if port in port_dict: port_dict[port] += 1
         else: port_dict[port] = 1
     return [port_dict, port_set]
-
-big_port_dictionary = create_port_dictionaries()
-port_dict = big_port_dictionary[0]
-port_set = big_port_dictionary[1]
 
 def compare_port_value(port):
     return port_dict[port]
@@ -85,3 +77,20 @@ def type_of_log():
         else:
             log = "Daylight in the swamp!"
     return log
+
+big_dictionary = []
+ip_dictionary = {}
+ip_set = {}
+
+big_port_dictionary = {}
+port_dict = []
+port_set = {}
+
+if len(sys.argv) >= 2:
+    big_dictionary = create_dictionaries()
+    ip_dictionary = big_dictionary[0]
+    ip_set = big_dictionary[1]
+
+    big_port_dictionary = create_port_dictionaries()
+    port_dict = big_port_dictionary[0]
+    port_set = big_port_dictionary[1]

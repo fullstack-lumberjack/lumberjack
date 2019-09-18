@@ -5,14 +5,17 @@ from scripts import utility
 
 def main():
     log_type = utility.type_of_log()
-    print(f'You are looking at a {log_type}')
+    print(f'\nYou are looking at a {log_type}.\n')
 
-    if len(sys.argv) == 2: 
-        print(utility.unique_ips())
-        print(utility.most_ips())
-        print(utility.least_ips())
+    print(utility.unique_ips())
+    print(utility.most_ips())
+    print(utility.least_ips())
+
+    option = sys.argv[2]
+
+    if option ==
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
-        print("How to use: lumberjack.py <logfile> <logtype>. Ex: lumberjack.py log.txt <-a>")
+        print("How to use: lumberjack <log> <option> Ex: lumberjack.py log.txt <-a>")
     else: main()
