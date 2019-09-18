@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-import utility
+from scripts import utility
 
 def main():
     log_type = utility.type_of_log()
