@@ -20,7 +20,8 @@ ip_dictionary = big_dictionary[0]
 ip_set = big_dictionary[1]
 
 def unique_ips():
-    print(f'There are {len(ip_set)} unique ips.')
+    print(f'\nThere are {len(ip_set)} unique ips.')
+    return 'FINISHED'
 
 def compare_value(ip):
     return ip_dictionary[ip]
@@ -30,14 +31,16 @@ def most_ips():
 
     print('\nThese are the top 5 most occurring ips:')
     for ip in reverse_sorted[:5]:
-        print(f'ip: {ip}, occurrence: {ip_dictionary[ip]}')
+        print(f'ip: {ip}, occurrences: {ip_dictionary[ip]}')
+    return 'FINISHED'
     
 def least_ips():
     sorted_ip_list = sorted(ip_dictionary, key=compare_value, reverse=False)
 
     print('\nThese are the top 5 least occurring ips:')
     for ip in sorted_ip_list[:5]:
-        print(f'ip: {ip}, occurrence: {ip_dictionary[ip]}')
+        print(f'ip: {ip}, occurrences: {ip_dictionary[ip]}')
+    return 'FINISHED'
 
 
 def create_port_dictionaries():
@@ -66,7 +69,7 @@ def most_ports():
     reverse_sorted = sorted(port_dict, key=compare_port_value, reverse=True)
     print('\nThese are the top 5 most occurring ports:')
     for port in reverse_sorted[:5]:
-        print(f'port: {port}, occurrence: {port_dict[port]}')
+        print(f'port: {port}, occurrences: {port_dict[port]}')
 
 def type_of_log():
     f = open(sys.argv[1])

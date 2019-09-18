@@ -4,9 +4,13 @@ import sys
 import utility
 
 def main():
-    print(utility.unique_ips())
-    print(utility.most_ips())
-    print(utility.least_ips())
+    log_type = utility.type_of_log()
+    print(f'You are looking at a {log_type}')
+
+    if len(sys.argv) == 2: 
+        print(utility.unique_ips())
+        print(utility.most_ips())
+        print(utility.least_ips())
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
