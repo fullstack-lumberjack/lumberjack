@@ -1,4 +1,4 @@
-# LumberLack - Expert Log Worker
+![](https://www.pngfind.com/pngs/m/204-2049920_lumberjack-logo-knotts-berry-farm-hd-png-download.png)
 LumberJack is a python log parsing program that can identify log types and return the most common queried log information. 
 
 ## How to use
