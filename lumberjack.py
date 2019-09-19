@@ -17,7 +17,7 @@ def main():
     # '--aip': apache.apache_ip_and_code
     # }
     # print(switcher.get(sys.argv[2], options.print_option)())
-    print(interactive.interactive())
+    interactive.interactive()
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:

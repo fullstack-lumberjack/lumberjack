@@ -9,12 +9,11 @@ def apache_status_code():
     for code in apache_list:
         apache_set.add(code)
     if len(apache_set) == 0:
-        print(f'There were no status codes found.')
+        return f'There were no status codes found.'
     if len(apache_set) == 1:
-        print(f'This status code was found: {apache_set} \n')
+        return f'This status code was found: {apache_set}'
     if len(apache_set) > 1:
-        print(f'These status codes were found: {apache_set} \n')
-    return ' '
+        return f'These status codes were found: {apache_set}'
 
 def apache_request_code():
     content = open(sys.argv[1], 'r').read()
@@ -25,9 +24,8 @@ def apache_request_code():
             apache_request_dict[request] = 1
         elif request in apache_request_dict:
             apache_request_dict[request] += 1
-    print(f'This is a count of the request codes: {apache_request_dict} \n')
+    return f'This is a count of the request codes: {apache_request_dict}'
 
-    return ' '
 
 def apache_ip_and_code():
     content = open(sys.argv[1], 'r').readlines()
@@ -50,9 +48,9 @@ def apache_ip_and_code():
                 ip_and_code_dict[status_code].add(ip)
     for status in ip_and_code_dict:
         if status == '403':
-            print(f'These ips are attempting to access forbidden pages {ip_and_code_dict[status]}')
+            return f'These ips are attempting to access forbidden pages {ip_and_code_dict[status]}'
         if status == '404':
-            print(f'These ips are attempting to access pages that aren\'t found {ip_and_code_dict[status]}')
+            return f'These ips are attempting to access pages that aren\'t found {ip_and_code_dict[status]}'
 
 
     # lst = []

@@ -22,7 +22,7 @@ def ufw_status_code():
     for ip in audit_list:
         audit_set.add(ip)
     print(f'These are the audited ips: {audit_set}')
-    return ' '
+    return 'FINISHED'
     
 def ufw_protocol():
     content = open(sys.argv[1], 'r').read()
@@ -31,7 +31,7 @@ def ufw_protocol():
     protocol_set = set()
     for p in protocol_list:
         protocol_set.add(p)
-    print(f'These are the protocols used: {protocol_set}')
-    return ' '
+    return f'These are the protocols used: {protocol_set}'
+    
 if __name__ == '__main__':
     main()
