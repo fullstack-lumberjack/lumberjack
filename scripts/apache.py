@@ -54,9 +54,6 @@ def apache_ip_and_code():
         if status == '404':
             print(f'These ips are attempting to access pages that aren\'t found {ip_and_code_dict[status]}')
 
-if __name__ == "__main__":
-    main()
-
 
     # lst = []
     # dict = {}
