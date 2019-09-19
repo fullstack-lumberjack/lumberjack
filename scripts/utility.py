@@ -10,7 +10,7 @@ CYAN = '\033[36m'
 RESET = '\033[0m'
 YELLOW = '\033[33m'
 
-if len()
+
 def create_dictionaries():
     content = open(sys.argv[1], 'r').read()
     all_ips = re.findall(r'[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+', content)
