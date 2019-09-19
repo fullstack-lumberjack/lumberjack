@@ -1,15 +1,6 @@
 import sys
 import re
 
-def main():
-    for option in sys.argv[2:]:
-        if option == '-as':
-            print(apache_status_code())
-        if option == '-r':
-            print(apache_request_code())
-        if option == '-c':
-            print(apache_ip_and_code())
-
 def apache_status_code():
     content = open(sys.argv[1], 'r').read()
     apache_list = re.findall(r'(?<=\"\ )[0-9]{3}(?=\ )', content)

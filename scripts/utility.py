@@ -10,6 +10,7 @@ CYAN = '\033[36m'
 RESET = '\033[0m'
 YELLOW = '\033[33m'
 
+if len()
 def create_dictionaries():
     content = open(sys.argv[1], 'r').read()
     all_ips = re.findall(r'[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+', content)
@@ -72,6 +73,8 @@ def most_ports():
 
     for port in reverse_sorted[:5]:
         print(f'port: {port}, occurrences: {port_dict[port]}')
+    
+    return 'FINISHED\n'
 
 def type_of_log():
     f = open(sys.argv[1])
@@ -87,6 +90,20 @@ def type_of_log():
         else:
             log = "Daylight in the swamp!"
     return log
+
+def print_all_ips():
+    print(unique_ips())
+    print(most_ips())
+    print(least_ips())
+
+def print_ips(argv):
+
+    switcher = {
+        '--unique': unique_ips,
+        '--most': most_ips,
+        '--least': least_ips,
+    }
+    print(switcher.get(argv[2], )())
 
 big_dictionary = []
 ip_dictionary = {}
