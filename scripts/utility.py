@@ -1,6 +1,7 @@
 import sys
 import re
 import colorama
+from prettytable import PrettyTable
 
 colorama.init()
 
@@ -45,9 +46,14 @@ def most_ips():
     reverse_sorted = sorted(ip_dictionary, key=compare_value, reverse=True)
 
     print(YELLOW+'These are the top 5 most occurring ips:'+RESET)
+
+    t = PrettyTable(['IP ADDRESS', 'OCCURRENCE'])
+
     for ip in reverse_sorted[:5]:
-        print(CYAN+'ip: ' + RESET+GREEN+f'{ip}' +RESET+CYAN+ ', occurrence: '+ RESET+GREEN+f'{ip_dictionary[ip]}'+RESET)
-    return 'FINISHED\n'
+        t.add_row([ip, ip_dictionary[ip]])
+        # print(CYAN+'ip: ' + RESET+GREEN+f'{ip}' +RESET+CYAN+ ', occurrence: '+ RESET+GREEN+f'{ip_dictionary[ip]}'+RESET)
+    print(t)
+    return 
     
 def least_ips():
     sorted_ip_list = sorted(ip_dictionary, key=compare_value, reverse=False)
