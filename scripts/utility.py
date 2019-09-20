@@ -59,9 +59,13 @@ def least_ips():
     sorted_ip_list = sorted(ip_dictionary, key=compare_value, reverse=False)
 
     print(YELLOW+'These are the top 5 least occurring ips:'+RESET)
+
+    t = PrettyTable(['IP ADDRESS', 'OCCURRENCE'])
     for ip in sorted_ip_list[:5]:
-        print(CYAN+'ip: ' + RESET+GREEN+f'{ip}' +RESET+CYAN+ ', occurrence: '+ RESET+GREEN+f'{ip_dictionary[ip]}'+RESET)
-    return 'FINISHED\n'
+        t.add_row([ip, ip_dictionary[ip]])
+        # print(CYAN+'ip: ' + RESET+GREEN+f'{ip}' +RESET+CYAN+ ', occurrence: '+ RESET+GREEN+f'{ip_dictionary[ip]}'+RESET)
+    print(t)
+    return
 
 
 def create_port_dictionaries():
@@ -85,11 +89,15 @@ def compare_port_value(port):
 def most_ports():
     reverse_sorted = sorted(port_dict, key=compare_port_value, reverse=True)
     print(YELLOW+'These are the top 5 most occurring ports:'+RESET)
-
-    for port in reverse_sorted[:5]:
-        print(f'port: {port}, occurrences: {port_dict[port]}')
     
-    return 'FINISHED\n'
+    t = PrettyTable(['IP ADDRESS', 'OCCURRENCE'])
+    
+    for port in reverse_sorted[:5]:
+        t.add_row([port, port_dict[port]])
+        # print(f'port: {port}, occurrences: {port_dict[port]}')
+    
+    print(t)
+    return
 
 def type_of_log():
     f = open(sys.argv[1])
