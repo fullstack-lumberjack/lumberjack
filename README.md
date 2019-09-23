@@ -4,3 +4,4 @@ LumberJack is a python log parsing program that can identify log types and retur
 ## How to use
 1. `$ git clone https://github.com/fullstack-lumberjack/lumberjack.git`
 2. run `install.sh`
+3. `$ lumberjack ./path/to/log`
