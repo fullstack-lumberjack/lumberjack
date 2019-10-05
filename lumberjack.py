@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import sys
-# import interactive
 from scripts import interactive
 
 def main():
