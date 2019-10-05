@@ -164,8 +164,6 @@ def interactive():
         }
     ]
 
-
-
     if utility.type_of_log() == 'linux firewall log':
         questions = firewall
     if utility.type_of_log() == 'web server log':
