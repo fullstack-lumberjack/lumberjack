@@ -22,7 +22,7 @@ def apache_status_code():
     if len(apache_set) == 1:
         print(YELLOW+f'This status code was found: '+RESET+f'{apache_set}')
     if len(apache_set) > 1:
-        print(YELLOW+f'These status code was found: '+RESET+f'{apache_set}')
+        print(YELLOW+f'These status codes were found: '+RESET+f'{apache_set}')
     return "END OF OUTPUT"
 
 def apache_request_code():
@@ -39,45 +39,62 @@ def apache_request_code():
 
 def apache_ip_and_code():
     content = open(sys.argv[1], 'r').readlines()
-    
     ip_and_code_dict = {}
+    error_list = []
+    for line in content:
+        new_content = re.findall(r'([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)(?: [^\"]*\"[^\"]*\" )([4][0-9]{2})', line)
+        #print(len(new_content))
+        if len(new_content) > 0:
+            #print(new_content[0][0])
+            if new_content[0][1] in ip_and_code_dict:
+                ip_and_code_dict[new_content[0][1]].append(new_content[0][0])
+            else:
+                ip_and_code_dict[new_content[0][1]] = [(new_content[0][0])]
+    #print(ip_and_code_dict)
 
-    for c in content:
-        lines = c.split(' ')
-        status_code = ''
-        ip = lines[0]
-        if lines[6] == 'HTTP/0.99"':
-            status_code = lines[7]
-        else: 
-            status_code = lines[8]
+    for code, ips in ip_and_code_dict.items():
+        if code == '400':
+            #print(ips)
+            error_list = list(set(ips))
+            print(YELLOW+f'These ip addresses got a 400 error code: '+RESET+f'{error_list}')
+        if code == '401':
+            error_list = list(set(ips))
+            print(YELLOW+f'These ip addresses got a 401 error code: '+RESET+f'{error_list}')
+        if code == '403':
+            #print(ips)
+            error_list = list(set(ips))
+            print(YELLOW+f'These ip addresses got a 403 error code: '+RESET+f'{error_list}')
+        if code == '404':
+            #print(ips)
+            error_list = list(set(ips))
+            print(YELLOW+f'These ip addresses got a 404 error code: '+RESET+f'{error_list}')
+        if code == '405':
+            #print(ips)
+            error_list = list(set(ips))
+            print(YELLOW+f'These ip addresses got a 405 error code: '+RESET+f'{error_list}')
+        if code == '406':
+            #print(ips)
+            error_list = list(set(ips))
+            print(YELLOW+f'These ip addresses got a 406 error code: '+RESET+f'{error_list}')
+    return 'Exit'
+    # ip_and_code_dict = {}
+    # for c in content:
+    #     lines = c.split(' ')
+    #     status_code = ''
+    #     ip = lines[0]
+    #     if lines[6] == 'HTTP/0.99"':
+    #         status_code = lines[7]
+    #     else: 
+    #         status_code = lines[8]
         
-        if int(status_code) >= 400 and int(status_code) <= 406:
-            if status_code in ip_and_code_dict: ip_and_code_dict[status_code].add(ip)
-            else: 
-                ip_and_code_dict[status_code] = set()
-                ip_and_code_dict[status_code].add(ip)
-    for status in ip_and_code_dict:
-        if status == '403':
-            print(YELLOW+f'These ips are attempting to access forbidden pages: '+RESET+f'{ip_and_code_dict[status]}')
-        if status == '404':
-            print(YELLOW+f'These ips are attempting to access pages that aren\'t found '+RESET+f'{ip_and_code_dict[status]}')
-        return 'END OF OUTPUT'
-
-    # lst = []
-    # dict = {}
-
-    # for line in content:
-    #     apache_code = re.match(r'(?<=\"\ )[0-9]{3}(?=\ )', line)   
-    #     if apache_code == True:
-    #         lst.append(line)
-    #     print(lst)
-    # for line in lst:
-    #     ip = re.match(r'[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+', lst)
-    #     new_lst = lst.split(' ')
-
-    #     for l in new_lst:
-    #         if l not in dict:
-    #             dict[l] = set()
-    #             dict[l].add(ip)
-    #         else:
-    #             dict[l].add(ip)
+    #     if int(status_code) >= 400 and int(status_code) <= 406:
+    #         if status_code in ip_and_code_dict: ip_and_code_dict[status_code].add(ip)
+    #         else: 
+    #             ip_and_code_dict[status_code] = set()
+    #             ip_and_code_dict[status_code].add(ip)
+    # for status in ip_and_code_dict:
+    #     if status == '403':
+    #         print(YELLOW+f'These ips are attempting to access forbidden pages: '+RESET+f'{ip_and_code_dict[status]}')
+    #     if status == '404':
+    #         print(YELLOW+f'These ips are attempting to access pages that aren\'t found '+RESET+f'{ip_and_code_dict[status]}')
+    #     return 'END OF OUTPUT'

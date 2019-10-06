@@ -83,7 +83,7 @@ def most_ports(port_dict):
     reverse_sorted = sorted(port_dict, key=lambda port: port_dict[port], reverse=True)
     print(YELLOW+'These are the top 5 most occurring ports:'+RESET)
     
-    t = PrettyTable(['IP ADDRESS', 'OCCURRENCE'])
+    t = PrettyTable(['PORT', 'OCCURRENCE'])
     
     for port in reverse_sorted[:5]:
         t.add_row([port, port_dict[port]])
