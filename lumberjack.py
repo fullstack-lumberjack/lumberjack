@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-from scripts import interactive
+from scripts import interactive, utility
 
 def main():
     interactive.interactive()
@@ -9,4 +9,5 @@ def main():
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
         print("How to use: lumberjack <log> <option> Ex: $ lumberjack log.txt <-a>")
-    else: main()
+    else: 
+        main()
