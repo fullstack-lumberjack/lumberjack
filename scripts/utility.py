@@ -35,15 +35,12 @@ def create_dictionaries():
     
     return [ip_dictionary, ip_set]
 
-def unique_ips():
+def unique_ips(ip_set):
     print(f'There are {len(ip_set)} unique ips.')
     return 'FINISHED\n'
 
-def compare_value(ip):
-    return ip_dictionary[ip]
-
-def most_ips():
-    reverse_sorted = sorted(ip_dictionary, key=compare_value, reverse=True)
+def most_ips(ip_dictionary):
+    reverse_sorted = sorted(ip_dictionary, key=lambda ip: ip_dictionary[ip], reverse=True)
 
     print(YELLOW+'These are the top 5 most occurring ips:'+RESET)
 
@@ -55,8 +52,8 @@ def most_ips():
     print(t)
     return 
     
-def least_ips():
-    sorted_ip_list = sorted(ip_dictionary, key=compare_value, reverse=False)
+def least_ips(ip_dictionary):
+    sorted_ip_list = sorted(ip_dictionary, key=lambda ip: ip_dictionary[ip], reverse=False)
 
     print(YELLOW+'These are the top 5 least occurring ips:'+RESET)
 
@@ -82,11 +79,8 @@ def create_port_dictionaries():
         else: port_dict[port] = 1
     return [port_dict, port_set]
 
-def compare_port_value(port):
-    return port_dict[port]
-
-def most_ports():
-    reverse_sorted = sorted(port_dict, key=compare_port_value, reverse=True)
+def most_ports(port_dict):
+    reverse_sorted = sorted(port_dict, key=lambda port: port_dict[port], reverse=True)
     print(YELLOW+'These are the top 5 most occurring ports:'+RESET)
     
     t = PrettyTable(['IP ADDRESS', 'OCCURRENCE'])
@@ -113,10 +107,10 @@ def type_of_log():
             log = "Daylight in the swamp!"
     return log
 
-def print_all_ips():
-    print(unique_ips())
-    print(most_ips())
-    print(least_ips())
+def print_all_ips(ip_dictionary, ip_set):
+    print(unique_ips(ip_set))
+    print(most_ips(ip_dictionary))
+    print(least_ips(ip_dictionary))
 
 def print_ips(argv):
 
@@ -127,19 +121,19 @@ def print_ips(argv):
     }
     print(switcher.get(argv[2], )())
 
-big_dictionary = []
-ip_dictionary = {}
-ip_set = {}
+# big_dictionary = []
+# ip_dictionary = {}
+# ip_set = {}
 
-big_port_dictionary = {}
-port_dict = []
-port_set = {}
+# big_port_dictionary = {}
+# port_dict = []
+# port_set = {}
 
-if len(sys.argv) >= 2:
-    big_dictionary = create_dictionaries()
-    ip_dictionary = big_dictionary[0]
-    ip_set = big_dictionary[1]
+# if len(sys.argv) >= 2:
+#     big_dictionary = create_dictionaries()
+#     ip_dictionary = big_dictionary[0]
+#     ip_set = big_dictionary[1]
 
-    big_port_dictionary = create_port_dictionaries()
-    port_dict = big_port_dictionary[0]
-    port_set = big_port_dictionary[1]
+#     big_port_dictionary = create_port_dictionaries()
+#     port_dict = big_port_dictionary[0]
+#     port_set = big_port_dictionary[1]

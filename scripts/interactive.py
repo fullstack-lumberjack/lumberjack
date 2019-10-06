@@ -4,6 +4,9 @@ from PyInquirer import style_from_dict, Token, prompt, Separator
 from examples import custom_style_2
 from scripts import utility, apache, ufw_status
 
+ip_dictionary, ip_set = utility.create_dictionaries()
+port_dict, port_set = utility.create_port_dictionaries()
+
 def interactive():
 
     firewall = [
@@ -176,15 +179,15 @@ def interactive():
         if "Type of log" in value:
             pprint(utility.type_of_log())
         if "Most frequently found IPs" in value:
-            pprint(utility.most_ips())
+            pprint(utility.most_ips(ip_dictionary))
         if "Least frequently found IPs" in value:
-            pprint(utility.least_ips())
+            pprint(utility.least_ips(ip_dictionary))
         if "Number of Unique IPs" in value:
-            pprint(utility.unique_ips())
+            pprint(utility.unique_ips(ip_set))
         if "All of the above" in value:
-            pprint(utility.print_all_ips())
+            pprint(utility.print_all_ips(ip_dictionary, ip_set))
         if "Most frequently found ports" in value:
-            pprint(utility.most_ports())
+            pprint(utility.most_ports(port_dict))
         if "Status Codes" in value:
             pprint(apache.apache_status_code())
         if "Count of Request Codes" in value:
