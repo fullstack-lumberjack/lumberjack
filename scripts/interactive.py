@@ -177,11 +177,11 @@ def interactive():
     answers = prompt(questions, style=custom_style_2)
     for key, value in answers.items():
         if "Type of log" in value:
-            pprint(utility.type_of_log())
+            print(utility.type_of_log())
         if "Most frequently found IPs" in value:
-            pprint(utility.most_ips(ip_dictionary))
+            print(utility.print_ip_table(ip_dictionary, True))
         if "Least frequently found IPs" in value:
-            pprint(utility.least_ips(ip_dictionary))
+            print(utility.print_ip_table(ip_dictionary, False))
         if "Number of Unique IPs" in value:
             pprint(utility.unique_ips(ip_set))
         if "All of the above" in value:
