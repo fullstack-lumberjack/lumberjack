@@ -59,7 +59,7 @@ def print_ip_table(ip_dictionary, direction=True):
 
     return create_table(ip_dictionary, sorted_list, 'IP ADDRESS', 'OCCURRENCE', 5)
 
-def create_port_dictionaries():
+def create_port_dictionary():
     content = open(sys.argv[1], 'r').read()
     all_source_ports = re.findall(r"SPT=([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])", content)
     all_dest_ports = re.findall(r"DPT=([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])", content)
