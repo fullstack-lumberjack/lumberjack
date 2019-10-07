@@ -35,34 +35,28 @@ def create_dictionaries():
     
     return [ip_dictionary, ip_set]
 
+def create_table(dictionary, sorted_list, header1, header2, amount):
+    t = PrettyTable([header1, header2])
+
+    for i in range(0, amount):
+        ip = sorted_list[i]
+        t.add_row([ip, dictionary[ip]])
+    
+    return t
+
 def unique_ips(ip_set):
     print(f'There are {len(ip_set)} unique ips.')
     return 'FINISHED\n'
 
-def most_ips(ip_dictionary):
-    reverse_sorted = sorted(ip_dictionary, key=lambda ip: ip_dictionary[ip], reverse=True)
+def print_ip_table(ip_dictionary, direction=True):
+    sorted_list = sorted(ip_dictionary,key=lambda ip: ip_dictionary[ip], reverse=direction)
 
-    print(YELLOW+'These are the top 5 most occurring ips:'+RESET)
+    if direction == True:
+        print(YELLOW+'These are the top 5 most occurring ips:'+RESET)
+    else:
+        print(YELLOW+'These are the top 5 least occurring ips:'+RESET)
 
-    t = PrettyTable(['IP ADDRESS', 'OCCURRENCE'])
-
-    for ip in reverse_sorted[:5]:
-        t.add_row([ip, ip_dictionary[ip]])
-        # print(CYAN+'ip: ' + RESET+GREEN+f'{ip}' +RESET+CYAN+ ', occurrence: '+ RESET+GREEN+f'{ip_dictionary[ip]}'+RESET)
-    print(t)
-    return 
-    
-def least_ips(ip_dictionary):
-    sorted_ip_list = sorted(ip_dictionary, key=lambda ip: ip_dictionary[ip], reverse=False)
-
-    print(YELLOW+'These are the top 5 least occurring ips:'+RESET)
-
-    t = PrettyTable(['IP ADDRESS', 'OCCURRENCE'])
-    for ip in sorted_ip_list[:5]:
-        t.add_row([ip, ip_dictionary[ip]])
-        # print(CYAN+'ip: ' + RESET+GREEN+f'{ip}' +RESET+CYAN+ ', occurrence: '+ RESET+GREEN+f'{ip_dictionary[ip]}'+RESET)
-    print(t)
-    return
+    return create_table(ip_dictionary, sorted_list, 'IP ADDRESS', 'OCCURRENCE', 5)
 
 def create_port_dictionaries():
     content = open(sys.argv[1], 'r').read()
@@ -83,7 +77,7 @@ def most_ports(port_dict):
     reverse_sorted = sorted(port_dict, key=lambda port: port_dict[port], reverse=True)
     print(YELLOW+'These are the top 5 most occurring ports:'+RESET)
     
-    t = PrettyTable(['PORT', 'OCCURRENCE'])
+    t = PrettyTable(['IP ADDRESS', 'OCCURRENCE'])
     
     for port in reverse_sorted[:5]:
         t.add_row([port, port_dict[port]])
@@ -120,20 +114,3 @@ def print_ips(argv):
         '--least': least_ips,
     }
     print(switcher.get(argv[2], )())
-
-# big_dictionary = []
-# ip_dictionary = {}
-# ip_set = {}
-
-# big_port_dictionary = {}
-# port_dict = []
-# port_set = {}
-
-# if len(sys.argv) >= 2:
-#     big_dictionary = create_dictionaries()
-#     ip_dictionary = big_dictionary[0]
-#     ip_set = big_dictionary[1]
-
-#     big_port_dictionary = create_port_dictionaries()
-#     port_dict = big_port_dictionary[0]
-#     port_set = big_port_dictionary[1]
