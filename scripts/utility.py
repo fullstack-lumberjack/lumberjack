@@ -78,15 +78,6 @@ def most_ports(port_dict):
 
     return create_table(port_dict, reverse_sorted, 'IP ADDRESS', 'OCCURRENCE', 5)
     
-    # t = PrettyTable(['IP ADDRESS', 'OCCURRENCE'])
-    
-    # for port in reverse_sorted[:5]:
-    #     t.add_row([port, port_dict[port]])
-    #     # print(f'port: {port}, occurrences: {port_dict[port]}')
-    
-    # print(t)
-    # return
-
 def type_of_log():
     f = open(sys.argv[1])
     lines = f.readlines()
@@ -101,12 +92,3 @@ def type_of_log():
         else:
             log = "Daylight in the swamp!"
     return log
-
-# def print_ips(argv):
-
-#     switcher = {
-#         '--unique': unique_ips,
-#         '--most': most_ips,
-#         '--least': least_ips,
-#     }
-#     print(switcher.get(argv[2], )())
