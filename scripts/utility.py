@@ -45,9 +45,8 @@ def create_table(dictionary, sorted_list, header1, header2, amount):
     return t
 
 def unique_ips(ip_set):
-    print(f'There are {len(ip_set)} unique ips.')
-    return 'FINISHED\n'
-
+    return f'There are {len(ip_set)} unique ips.'
+    
 def print_ip_table(ip_dictionary, direction=True):
     sorted_list = sorted(ip_dictionary,key=lambda ip: ip_dictionary[ip], reverse=direction)
 
@@ -76,15 +75,17 @@ def create_port_dictionaries():
 def most_ports(port_dict):
     reverse_sorted = sorted(port_dict, key=lambda port: port_dict[port], reverse=True)
     print(YELLOW+'These are the top 5 most occurring ports:'+RESET)
+
+    return create_table(port_dict, reverse_sorted, 'IP ADDRESS', 'OCCURRENCE', 5)
     
-    t = PrettyTable(['IP ADDRESS', 'OCCURRENCE'])
+    # t = PrettyTable(['IP ADDRESS', 'OCCURRENCE'])
     
-    for port in reverse_sorted[:5]:
-        t.add_row([port, port_dict[port]])
-        # print(f'port: {port}, occurrences: {port_dict[port]}')
+    # for port in reverse_sorted[:5]:
+    #     t.add_row([port, port_dict[port]])
+    #     # print(f'port: {port}, occurrences: {port_dict[port]}')
     
-    print(t)
-    return
+    # print(t)
+    # return
 
 def type_of_log():
     f = open(sys.argv[1])
@@ -101,16 +102,11 @@ def type_of_log():
             log = "Daylight in the swamp!"
     return log
 
-def print_all_ips(ip_dictionary, ip_set):
-    print(unique_ips(ip_set))
-    print(most_ips(ip_dictionary))
-    print(least_ips(ip_dictionary))
+# def print_ips(argv):
 
-def print_ips(argv):
-
-    switcher = {
-        '--unique': unique_ips,
-        '--most': most_ips,
-        '--least': least_ips,
-    }
-    print(switcher.get(argv[2], )())
+#     switcher = {
+#         '--unique': unique_ips,
+#         '--most': most_ips,
+#         '--least': least_ips,
+#     }
+#     print(switcher.get(argv[2], )())

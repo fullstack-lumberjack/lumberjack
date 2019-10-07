@@ -19,17 +19,18 @@ def interactive():
                 {
                     'name': 'Type of log'
                 },
-                Separator('= Exit ='),
-                {
-                    'name': 'Exit'
-                },
                 Separator('= Status Codes (Firewall logs) = '),
                 {
                     'name': "Firewall Status Codes"
                 },
                 {
                     'name': 'Protocols'
+                },
+                Separator('= Exit Program ='),
+                {
+                    'name': 'Exit'
                 }
+                
             ],
             'validate': lambda answer: 'You must choose at least one option.' \
                 if len(answer) == 0 else True
@@ -46,10 +47,6 @@ def interactive():
                 {
                     'name': 'Type of log'
                 },
-                Separator('= Exit ='),
-                {
-                    'name': 'Exit'
-                },
                 Separator('= IPs ='),
                 {
                     'name': 'Most frequently found IPs',
@@ -60,9 +57,9 @@ def interactive():
                 {
                     'name': 'Number of Unique IPs'
                 },
-                {
-                    'name': 'All of the above'
-                },
+                # {
+                #     'name': 'All of the above'
+                # },
                 Separator('= Status Codes (Web logs) = '),
                 {
                     'name': 'Status Codes'
@@ -72,6 +69,10 @@ def interactive():
                 },
                 {
                     'name': 'Potentially malicious IPs'
+                },
+                Separator('= Exit Program ='),
+                {
+                    'name': 'Exit'
                 }
             ],
             'validate': lambda answer: 'You must choose at least one option.' \
@@ -89,10 +90,6 @@ def interactive():
                 {
                     'name': 'Type of log'
                 },
-                Separator('= Exit ='),
-                {
-                    'name': 'Exit'
-                },
                 Separator('= IPs ='),
                 {
                     'name': 'Most frequently found IPs',
@@ -103,12 +100,16 @@ def interactive():
                 {
                     'name': 'Number of Unique IPs'
                 },
-                {
-                    'name': 'All of the above'
-                },
+                # {
+                #     'name': 'All of the above'
+                # },
                 Separator('= Ports ='),
                 {
                     'name': 'Most frequently found ports'
+                },
+                Separator('= Exit Program ='),
+                {
+                    'name': 'Exit'
                 }
             ],
             'validate': lambda answer: 'You must choose at least one option.' \
@@ -125,10 +126,6 @@ def interactive():
                 Separator('= Type of log ='),
                 {
                     'name': 'Type of log'
-                },
-                Separator('= Exit ='),
-                {
-                    'name': 'Exit'
                 },
                 Separator('= IPs ='),
                 {
@@ -160,6 +157,10 @@ def interactive():
                 },
                 {
                     'name': 'Protocols'
+                },
+                Separator('= Exit Program ='),
+                {
+                    'name': 'Exit'
                 }
             ],
             'validate': lambda answer: 'You must choose at least one option.' \
@@ -183,20 +184,22 @@ def interactive():
         if "Least frequently found IPs" in value:
             print(utility.print_ip_table(ip_dictionary, False))
         if "Number of Unique IPs" in value:
-            pprint(utility.unique_ips(ip_set))
-        if "All of the above" in value:
-            pprint(utility.print_all_ips(ip_dictionary, ip_set))
+            print(utility.unique_ips(ip_set))
+        # if "All of the above" in value:
+        #     print(utility.unique_ips(ip_set))
+        #     print(utility.print_ip_table(ip_dictionary, True))
+        #     print(utility.print_ip_table(ip_dictionary, False))
         if "Most frequently found ports" in value:
-            pprint(utility.most_ports(port_dict))
+            print(utility.most_ports(port_dict))
         if "Status Codes" in value:
-            pprint(apache.apache_status_code())
+            print(apache.apache_status_code())
         if "Count of Request Codes" in value:
-            pprint(apache.apache_request_code())
+            print(apache.apache_request_code())
         if "Potentially malicious IPs" in value:
-            pprint(apache.apache_ip_and_code())
+            print(apache.apache_ip_and_code())
         if "Firewall Status Codes" in value:
-            pprint(ufw_status.ufw_status_code())
+            print(ufw_status.ufw_status_code())
         if "Protocols" in value:
-            pprint(ufw_status.ufw_protocol())
+            print(ufw_status.ufw_protocol())
         if "Exit" in value:
             return
