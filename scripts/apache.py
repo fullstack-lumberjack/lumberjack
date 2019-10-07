@@ -17,13 +17,12 @@ def apache_status_code():
     apache_set = set()
     for code in apache_list:
         apache_set.add(code)
-    if len(apache_set) == 0:
-        print(f'There were no status codes found.')
-    if len(apache_set) == 1:
-        print(YELLOW+f'This status code was found: '+RESET+f'{apache_set}')
-    if len(apache_set) > 1:
-        print(YELLOW+f'These status codes were found: '+RESET+f'{apache_set}')
-    return "END OF OUTPUT"
+    if len(apache_set) <= 0:
+        return f'There were no status codes found.'
+    elif len(apache_set) == 1:
+        return YELLOW+f'This status code was found: '+RESET+f'{apache_set}'
+    else :
+        return YELLOW+f'These status codes were found: '+RESET+f'{apache_set}'
 
 def apache_request_code():
     content = open(sys.argv[1], 'r').read()
@@ -34,8 +33,7 @@ def apache_request_code():
             apache_request_dict[request] = 1
         elif request in apache_request_dict:
             apache_request_dict[request] += 1
-    print(YELLOW+f'This is a count of the request codes: '+RESET+f'{apache_request_dict}')
-    return "END OF OUTPUT"
+    return YELLOW+f'This is a count of the request codes: '+RESET+f'{apache_request_dict}'
 
 def apache_ip_and_code():
     content = open(sys.argv[1], 'r').readlines()
@@ -43,40 +41,33 @@ def apache_ip_and_code():
     error_list = []
     for line in content:
         new_content = re.findall(r'([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)(?: [^\"]*\"[^\"]*\" )([4][0-9]{2})', line)
-        #print(len(new_content))
         if len(new_content) > 0:
-            #print(new_content[0][0])
             if new_content[0][1] in ip_and_code_dict:
                 ip_and_code_dict[new_content[0][1]].append(new_content[0][0])
             else:
                 ip_and_code_dict[new_content[0][1]] = [(new_content[0][0])]
-    #print(ip_and_code_dict)
 
     for code, ips in ip_and_code_dict.items():
         if code == '400':
-            #print(ips)
             error_list = list(set(ips))
             print(YELLOW+f'These ip addresses got a 400 error code: '+RESET+f'{error_list}')
         if code == '401':
             error_list = list(set(ips))
             print(YELLOW+f'These ip addresses got a 401 error code: '+RESET+f'{error_list}')
         if code == '403':
-            #print(ips)
             error_list = list(set(ips))
             print(YELLOW+f'These ip addresses got a 403 error code: '+RESET+f'{error_list}')
         if code == '404':
-            #print(ips)
             error_list = list(set(ips))
             print(YELLOW+f'These ip addresses got a 404 error code: '+RESET+f'{error_list}')
         if code == '405':
-            #print(ips)
             error_list = list(set(ips))
             print(YELLOW+f'These ip addresses got a 405 error code: '+RESET+f'{error_list}')
         if code == '406':
-            #print(ips)
             error_list = list(set(ips))
             print(YELLOW+f'These ip addresses got a 406 error code: '+RESET+f'{error_list}')
     return 'Exit'
+    
     # ip_and_code_dict = {}
     # for c in content:
     #     lines = c.split(' ')
