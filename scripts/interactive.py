@@ -4,8 +4,8 @@ from PyInquirer import style_from_dict, Token, prompt, Separator
 from examples import custom_style_2
 from scripts import utility, apache, ufw_status
 
-ip_dictionary, ip_set = utility.create_dictionaries()
-port_dict, port_set = utility.create_port_dictionaries()
+ip_dictionary, ip_set = utility.create_ip_dictionaries()
+port_dict = utility.create_port_dictionaries()
 
 def interactive():
 

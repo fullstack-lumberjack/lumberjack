@@ -21,19 +21,21 @@ print('''
 
 ''')
 
-def create_dictionaries():
+def make_dictionaries(list_of_elements):
+    dictionary = {}
+    unique = set()
+    for item in list_of_elements:
+        unique.add(item)
+        if item in dictionary: 
+            dictionary[item] += 1
+        else:
+            dictionary[item] = 1
+    return [dictionary, unique]
+
+def create_ip_dictionary():
     content = open(sys.argv[1], 'r').read()
     all_ips = re.findall(r'[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+', content)
-
-    ip_dictionary = {}
-    ip_set = set()
-
-    for ip in all_ips:
-        ip_set.add(ip)
-        if ip in ip_dictionary: ip_dictionary[ip] += 1
-        else: ip_dictionary[ip] = 1 
-    
-    return [ip_dictionary, ip_set]
+    return make_dictionaries(all_ips)
 
 def create_table(dictionary, sorted_list, header1, header2, amount):
     t = PrettyTable([header1, header2])
@@ -41,7 +43,7 @@ def create_table(dictionary, sorted_list, header1, header2, amount):
     for i in range(0, amount):
         ip = sorted_list[i]
         t.add_row([ip, dictionary[ip]])
-    
+
     return t
 
 def unique_ips(ip_set):
@@ -61,17 +63,12 @@ def create_port_dictionaries():
     content = open(sys.argv[1], 'r').read()
     all_source_ports = re.findall(r"SPT=([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])", content)
     all_dest_ports = re.findall(r"DPT=([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])", content)
-    
-    port_dict = {}
-    port_set = set()
-    for port in all_source_ports: 
-        if port in port_dict: port_dict[port] += 1
-        else: port_dict[port] = 1
-    for port in all_dest_ports: 
-        if port in port_dict: port_dict[port] += 1
-        else: port_dict[port] = 1
-    return [port_dict, port_set]
 
+    src_ports = make_dictionaries(all_source_ports)
+    dst_ports = make_dictionaries(all_dest_ports)
+
+    return {**src_ports[0], **dst_ports[0]}
+    
 def most_ports(port_dict):
     reverse_sorted = sorted(port_dict, key=lambda port: port_dict[port], reverse=True)
     print(YELLOW+'These are the top 5 most occurring ports:'+RESET)
